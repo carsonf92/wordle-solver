@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Wordle Solver</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Solution generator for Wordle">
+        <meta name="keywords" content="Wordle, Solution, Dictionary">
+        <meta name="author" content="Carson Ford">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <main>
+            <section class="instructions">
+                <p>Enter your Wordle guess and mark the letters to find possible solutions.</p>
+            </section>
+            <form>
+                <div class="letter">
+                    <input class="letter__input" type="text" id="one" maxlength="1" tabindex="1"/>
+                    <fieldset>
+                        <input type="radio" name="one" value="black" tabindex="6" checked>
+                        <input type="radio" name="one" value="yellow" tabindex="7">
+                        <input type="radio" name="one" value="green" tabindex="8">
+                    </fieldset>
+                </div>
+                <div class="letter">
+                    <input class="letter__input" type="text" id="two" maxlength="1" tabindex="2"/>
+                    <fieldset>
+                        <input type="radio" name="two" value="black" tabindex="9" checked>
+                        <input type="radio" name="two" value="yellow" tabindex="10">
+                        <input type="radio" name="two" value="green" tabindex="11">
+                    </fieldset>
+                </div>
+                <div class="letter">
+                    <input class="letter__input" type="text" id="three" maxlength="1" tabindex="3"/>
+                    <fieldset>
+                        <input type="radio" name="three" value="black" tabindex="12" checked>
+                        <input type="radio" name="three" value="yellow" tabindex="13">
+                        <input type="radio" name="three" value="green" tabindex="14">
+                    </fieldset>
+                </div>
+                <div class="letter">
+                    <input class="letter__input" type="text" id="four" maxlength="1" tabindex="4"/>
+                    <fieldset>
+                        <input type="radio" name="four" value="black" tabindex="15" checked>
+                        <input type="radio" name="four" value="yellow" tabindex="16">
+                        <input type="radio" name="four" value="green" tabindex="17">
+                    </fieldset>
+                </div>
+                <div class="letter">
+                    <input class="letter__input" type="text" id="five" maxlength="1" tabindex="5"/>
+                    <fieldset>
+                        <input type="radio" name="five" value="black" tabindex="18" checked>
+                        <input type="radio" name="five" value="yellow" tabindex="19">
+                        <input type="radio" name="five" value="green" tabindex="20">
+                    </fieldset>
+                </div>
+                <input type="submit" value="Find Solutions" tabindex="21"/>
+            </form>
+            <section class="suggestions">
+                <span class="word">black</span>
+                <span class="word">swans</span>
+                <span class="word">crash</span>
+            </section>
+        </main>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
