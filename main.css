@@ -29,7 +29,7 @@ main {
     text-align: center;
 }
 
-form {
+.inputs {
     display: grid;
     gap: 8px;
     grid-template-columns: repeat(5, 1fr);
@@ -41,6 +41,7 @@ form {
     background: none;
     border: 2px solid var(--gray-light);
     color: var(--white);
+    cursor: pointer;
     font: bold 32px var(--sans-serif);
     height: 62px;
     outline: none;
@@ -59,11 +60,12 @@ form {
     border-color: var(--green);
 }
 
-input[type="text"]:focus {
+.letter__input:hover,
+.letter__input:focus {
     border-color: var(--white);
 }
 
-fieldset {
+.letter__buttons {
     border: none;
     display: grid;
     gap: 4px;
@@ -72,7 +74,7 @@ fieldset {
     padding: 0 4px;
 }
 
-input[type="radio"] {
+.letter__radio {
     appearance: none;
     aspect-ratio: 1/1;
     border: 2px solid;
@@ -82,23 +84,23 @@ input[type="radio"] {
     outline: none;
 }
 
-input[type="radio"][value="black"] { border-color: var(--gray-light); }
-input[type="radio"][value="yellow"] { border-color: var(--yellow); }
-input[type="radio"][value="green"] { border-color: var(--green); }
+.letter__radio[value="black"] { border-color: var(--gray-light); }
+.letter__radio[value="yellow"] { border-color: var(--yellow); }
+.letter__radio[value="green"] { border-color: var(--green); }
 
-input[type="radio"][value="black"]:checked { background-color: var(--gray-light); }
-input[type="radio"][value="yellow"]:checked { background-color: var(--yellow); }
-input[type="radio"][value="green"]:checked { background-color: var(--green); }
+.letter__radio[value="black"]:checked { background-color: var(--gray-light); }
+.letter__radio[value="yellow"]:checked { background-color: var(--yellow); }
+.letter__radio[value="green"]:checked { background-color: var(--green); }
 
-input[type="radio"]:not(:checked):hover {
+.letter__radio:not(:checked):hover {
     border-color: var(--white);
 }
 
-input[type="radio"]:focus {
+.letter__radio:focus {
     border-color: var(--white);
 }
 
-input[type="submit"] {
+.submit {
     appearance: none;
     background-color: var(--green);
     border: 2px solid var(--green);
@@ -114,8 +116,8 @@ input[type="submit"] {
     text-transform: uppercase;
 }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus {
+.submit:hover,
+.submit:focus {
     border-color: var(--white);
 }
 
@@ -126,7 +128,7 @@ input[type="submit"]:focus {
     justify-content: center;
 }
 
-.word {
+.suggestions__word {
     background-color: var(--gray-light);
     color: var(--white);
     letter-spacing: 1px;
