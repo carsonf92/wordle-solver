@@ -11,11 +11,12 @@
     <body>
         <main>
             <article class="instructions">
+                <h1>Wordle Solver</h1>
                 <p>Enter your Wordle guess and mark the letters to find possible solutions.</p>
             </article>
             <form class="inputs">
                 <div class="letter">
-                    <input class="letter__input" type="text" id="one" maxlength="1" tabindex="1"/>
+                    <input class="letter__input" type="text" autocomplete="off" id="one" maxlength="1" tabindex="1"/>
                     <fieldset class="letter__buttons">
                         <input class="letter__radio" type="radio" name="one" value="black" tabindex="6" checked>
                         <input class="letter__radio" type="radio" name="one" value="yellow" tabindex="7">
@@ -23,7 +24,7 @@
                     </fieldset>
                 </div>
                 <div class="letter">
-                    <input class="letter__input" type="text" id="two" maxlength="1" tabindex="2"/>
+                    <input class="letter__input" type="text" autocomplete="off" id="two" maxlength="1" tabindex="2"/>
                     <fieldset class="letter__buttons">
                         <input class="letter__radio" type="radio" name="two" value="black" tabindex="9" checked>
                         <input class="letter__radio" type="radio" name="two" value="yellow" tabindex="10">
@@ -31,7 +32,7 @@
                     </fieldset>
                 </div>
                 <div class="letter">
-                    <input class="letter__input" type="text" id="three" maxlength="1" tabindex="3"/>
+                    <input class="letter__input" type="text" autocomplete="off" id="three" maxlength="1" tabindex="3"/>
                     <fieldset class="letter__buttons">
                         <input class="letter__radio" type="radio" name="three" value="black" tabindex="12" checked>
                         <input class="letter__radio" type="radio" name="three" value="yellow" tabindex="13">
@@ -39,7 +40,7 @@
                     </fieldset>
                 </div>
                 <div class="letter">
-                    <input class="letter__input" type="text" id="four" maxlength="1" tabindex="4"/>
+                    <input class="letter__input" type="text" autocomplete="off" id="four" maxlength="1" tabindex="4"/>
                     <fieldset class="letter__buttons">
                         <input class="letter__radio" type="radio" name="four" value="black" tabindex="15" checked>
                         <input class="letter__radio" type="radio" name="four" value="yellow" tabindex="16">
@@ -47,20 +48,16 @@
                     </fieldset>
                 </div>
                 <div class="letter">
-                    <input class="letter__input" type="text" id="five" maxlength="1" tabindex="5"/>
+                    <input class="letter__input" type="text" autocomplete="off" id="five" maxlength="1" tabindex="5"/>
                     <fieldset class="letter__buttons">
                         <input class="letter__radio" type="radio" name="five" value="black" tabindex="18" checked>
                         <input class="letter__radio" type="radio" name="five" value="yellow" tabindex="19">
                         <input class="letter__radio" type="radio" name="five" value="green" tabindex="20">
                     </fieldset>
                 </div>
-                <input class="submit" type="submit" value="Find Solutions" tabindex="21"/>
+                <input class="submit" type="submit" value="Find Solutions" tabindex="21" disabled/>
             </form>
-            <section class="suggestions">
-                <span class="suggestions__word">black</span>
-                <span class="suggestions__word">swans</span>
-                <span class="suggestions__word">crash</span>
-            </section>
+            <section class="suggestions"></section>
         </main>
         <script type="text/javascript" src="main.js"></script>
     </body>

@@ -4,18 +4,47 @@
 
 document.querySelectorAll('input[type="text"]').forEach(input => {
     
-    // clear letter on click
-    input.addEventListener('click', (event) => {
+    // clear letter on focus (for tabbing)
+    input.addEventListener('focus', (event) => {
         event.target.value = '';
     });
 
-    // auto advance to next letter
     input.addEventListener('keyup', (event) => {
+
+        // auto advance to next letter
         if (event.target.value.length >= event.target.maxLength) {
-            event.target.parentElement.nextElementSibling.querySelector('input[type="text"]').focus();
+            if (event.target.id != 'five') {
+                event.target.parentElement.nextElementSibling.querySelector('input[type="text"]').focus();
+            }
         }
+
+        // backspace/delete to go back an input
+        if (event.key == 'Backspace' || event.key == "Delete") {
+            event.target.value = '';
+            if (event.target.id != 'one') {
+                event.target.parentElement.previousElementSibling.  querySelector('input[type="text"]').focus();
+                }
+        }
+
+        submitCheck();
     });
 });
+
+function submitCheck() {
+    let valuesSet = true;
+
+    document.querySelectorAll('.letter__input').forEach(input => {
+        if (!input.value) {
+            valuesSet = false;
+        }
+    });
+
+    if (valuesSet) {
+        document.querySelector('.submit').removeAttribute('disabled', true);
+    } else {
+        document.querySelector('.submit').setAttribute('disabled', false);
+    }
+}
 
 // ========================
 // Letter markers
@@ -35,7 +64,98 @@ document.querySelectorAll('input[type="radio"]').forEach(input => {
     });
 });
 
+// ========================
+// Search for possibilities
+// ========================
 
+document.querySelector('input[type="submit"]').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    document.querySelector('.suggestions').innerHTML = '';
+
+
+    // need to rework regex
+    //
+    // get green letter results, then
+    // of those, get ones containing yellow letters, then
+    // of those, remove ones where the yellow letter was and any black letters
+
+    let letters = [];
+    let stati = [];
+
+    document.querySelectorAll('.letter__input').forEach(input => {
+        letters.push(input.value);
+        stati.push(input.classList[input.classList.length - 1]);
+    });
+   
+    let greenExpression = '\\b';
+
+    for (let i = 0; i < 5; i++) {
+        if (stati[i].includes('green')) {
+            greenExpression += `([${letters[i]}])`;
+        } else {
+            greenExpression += `([^${letters[i]}])`;
+        }
+    }
+
+    greenExpression += '\\b';
+
+    let greenRegExp = new RegExp(greenExpression, 'gi');
+    
+    let possibilities = dictionary.match(greenRegExp).join(' ');
+
+    for (let i = 0; i < 5; i++) {
+        if (stati[i].includes('yellow')) {
+            let yellowRegExp = new RegExp(`\\b(?=\\w*[${letters[i]}])\\w+\\b`, 'gi');
+            possibilities = possibilities.match(yellowRegExp).join(' ');
+        }
+    }
+
+    let blackExpression = '\\b';
+
+    for (let i = 0; i < 5; i++) {
+        if (!stati[i].includes('green')) {
+            blackExpression += `([^${letters[i]}])`;
+        } else {
+            blackExpression += '([A-Z])';
+        }
+    }
+
+    blackExpression += '\\b';
+
+    let blackRegExp = new RegExp(blackExpression, 'gi');
+
+    possibilities = possibilities.match(blackRegExp);
+
+    if (!possibilities) {
+        possibilities = ['No matches found'];
+    }
+
+    let index = 0;
+    let delay = 0;
+
+    possibilities.forEach(possibility => {
+        if (index < 33) {
+            let span = document.createElement('span');
+            span.classList.add('suggestions__word');
+            span.style.animationDelay = `${delay}s`;
+            span.innerHTML = possibility;
+            document.querySelector('.suggestions').appendChild(span);
+            index++;
+            delay += 0.02;
+        } else if (index == 33) {
+            let div = document.createElement('div');
+            div.classList.add('suggestions__word', 'suggestions__word--last');
+            div.style.animationDelay = `${delay}s`;
+            div.innerHTML = `${(possibilities.length - index)} more possibilities`;
+            document.querySelector('.suggestions').appendChild(div);
+            index++;
+        } else {
+            // show no more results
+        }
+    });
+
+});
 
 
 // ========================
