@@ -73,13 +73,6 @@ document.querySelector('input[type="submit"]').addEventListener('click', (event)
 
     document.querySelector('.suggestions').innerHTML = '';
 
-
-    // need to rework regex
-    //
-    // get green letter results, then
-    // of those, get ones containing yellow letters, then
-    // of those, remove ones where the yellow letter was and any black letters
-
     let letters = [];
     let stati = [];
 
@@ -99,9 +92,7 @@ document.querySelector('input[type="submit"]').addEventListener('click', (event)
     }
 
     greenExpression += '\\b';
-
     let greenRegExp = new RegExp(greenExpression, 'gi');
-    
     let possibilities = dictionary.match(greenRegExp).join(' ');
 
     for (let i = 0; i < 5; i++) {
@@ -110,22 +101,15 @@ document.querySelector('input[type="submit"]').addEventListener('click', (event)
             possibilities = possibilities.match(yellowRegExp).join(' ');
         }
     }
-
-    let blackExpression = '\\b';
-
-    for (let i = 0; i < 5; i++) {
-        if (!stati[i].includes('green')) {
-            blackExpression += `([^${letters[i]}])`;
-        } else {
-            blackExpression += '([A-Z])';
+	
+	for (let i = 0; i < 5; i++) {
+        if (!stati[i].includes('green') && !stati[i].includes('yellow')) {
+            let blackRegExp = new RegExp(`\\b[^\\s${letters[i]}]+\\b`, 'gi');		
+            possibilities = possibilities.match(blackRegExp).join(' ');
         }
     }
-
-    blackExpression += '\\b';
-
-    let blackRegExp = new RegExp(blackExpression, 'gi');
-
-    possibilities = possibilities.match(blackRegExp);
+	
+	possibilities = possibilities.split(' ');
 
     if (!possibilities) {
         possibilities = ['No matches found'];
